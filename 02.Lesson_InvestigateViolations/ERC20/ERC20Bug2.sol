@@ -275,7 +275,7 @@ contract ERC20 is IERC20, IERC20Metadata {
 
         uint256 senderBalance = _balances[sender];
         unchecked {
-            _balances[sender] = senderBalance - amount;
+            _balances[sender] = senderBalance - amount; // @note it should be checked
         }
         _balances[recipient] += amount;
 
