@@ -26,7 +26,7 @@ Answer: yes, they are equivalent
 Answer: D, None of the above 
 </br>
 
-Q 2 Solution:
+</br>Q 2 Solution:
 <img src="images/Additional_Exercise_Q02_Solution.png" width="350">
 Answer: C, True for some cases and false for other cases
 </br>
