@@ -10,11 +10,37 @@ methods {
 	scheduleMeeting(uint256, uint256, uint256)
 }
 
-definition meetingUninitialized(uint256 meetingId) returns bool = getStartTimeById(meetingId) == 0 && getEndTimeById(meetingId) == 0 && getStateById(meetingId) == 0 && getNumOfParticipents(meetingId) == 0 && getOrganizer(meetingId) == 0;
-definition meetingPending(uint256 meetingId) returns bool = getStartTimeById(meetingId) > 0 && getEndTimeById(meetingId) > getStartTimeById(meetingId) && getStateById(meetingId) == 1 && getNumOfParticipents(meetingId) == 0 && getOrganizer(meetingId) != 0;
-definition meetingStarted(uint256 meetingId) returns bool = getStartTimeById(meetingId) > 0 && getEndTimeById(meetingId) > getStartTimeById(meetingId) && getStateById(meetingId) == 2 && getOrganizer(meetingId) != 0;̃
-definition meetingEnded(uint256 meetingId) returns bool = getStartTimeById(meetingId) > 0 && getEndTimeById(meetingId) > getStartTimeById(meetingId) && getStateById(meetingId) == 3 && getOrganizer(meetingId) != 0;̃̃
-definition meetingCancelled(uint256 meetingId) returns bool = getStartTimeById(meetingId) > 0 && getEndTimeById(meetingId) > getStartTimeById(meetingId) && getStateById(meetingId) == 4 && getOrganizer(meetingId) != 0;̃̃
+definition meetingUninitialized(uint256 meetingId) returns bool = 
+	getStartTimeById(meetingId) == 0 && 
+	getEndTimeById(meetingId) == 0 && 
+	getStateById(meetingId) == 0 && 
+	getNumOfParticipents(meetingId) == 0 && 
+	getOrganizer(meetingId) == 0;
+
+definition meetingPending(uint256 meetingId) returns bool = 
+	getStartTimeById(meetingId) > 0 && 
+	getEndTimeById(meetingId) > getStartTimeById(meetingId) && 
+	getStateById(meetingId) == 1 && 
+	getNumOfParticipents(meetingId) == 0 && 
+	getOrganizer(meetingId) != 0;
+
+definition meetingStarted(uint256 meetingId) returns bool = 
+	getStartTimeById(meetingId) > 0 && 
+	getEndTimeById(meetingId) > getStartTimeById(meetingId) && 
+	getStateById(meetingId) == 2 && 
+	getOrganizer(meetingId) != 0;
+
+definition meetingEnded(uint256 meetingId) returns bool = 
+	getStartTimeById(meetingId) > 0 && 
+	getEndTimeById(meetingId) > getStartTimeById(meetingId) && 
+	getStateById(meetingId) == 3 && 
+	getOrganizer(meetingId) != 0;
+
+definition meetingCancelled(uint256 meetingId) returns bool = 
+	getStartTimeById(meetingId) > 0 && 
+	getEndTimeById(meetingId) > getStartTimeById(meetingId) && 
+	getStateById(meetingId) == 4 && 
+	getOrganizer(meetingId) != 0;
 
 /*  Representing enums
 

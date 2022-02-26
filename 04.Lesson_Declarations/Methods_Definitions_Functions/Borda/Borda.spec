@@ -31,10 +31,22 @@ function getContenderRegistered(address contender) returns bool {
     return registered;
 }
 
-definition unRegisteredVoter(address voter) returns bool = !getVoterRegistered(voter);
-definition registeredYetVotedVoter(address voter) returns bool = getVoterRegistered(voter) && !getVoterVoted(voter);
-definition legitRegisteredVotedVoter(address voter) returns bool = getVoterRegistered(voter) && getVoterVoted(voter) && !getVoterBlocked(voter);
-definition blockedVoter(address voter) returns bool = getVoterRegistered(voter) && getVoterVoted(voter) && getVoterBlocked(voter);
+definition unRegisteredVoter(address voter) returns bool = 
+    !getVoterRegistered(voter);
+
+definition registeredYetVotedVoter(address voter) returns bool = 
+    getVoterRegistered(voter) && 
+    !getVoterVoted(voter);
+
+definition legitRegisteredVotedVoter(address voter) returns bool = 
+    getVoterRegistered(voter) && 
+    getVoterVoted(voter) && 
+    !getVoterBlocked(voter);
+
+definition blockedVoter(address voter) returns bool = 
+    getVoterRegistered(voter) && 
+    getVoterVoted(voter) && 
+    getVoterBlocked(voter);
 
 // Checks that a voter's "registered" mark is changed correctly - 
 // If it's false after a function call, it was false before
