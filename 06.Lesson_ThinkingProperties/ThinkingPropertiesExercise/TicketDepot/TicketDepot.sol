@@ -88,4 +88,11 @@ contract TicketDepot {
 			delete offerings[offerID];  
 	} 
 
+	function getNumTickets() external view returns (uint16) {
+		return numEvents;
+	}
+
+	function ticketsRemaining(uint16 _eventID) external view returns (uint16) {
+		return eventsMap[_eventID].ticketsRemaining;
+	}
 } 
