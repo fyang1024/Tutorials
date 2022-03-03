@@ -37,3 +37,5 @@ rule userAssetsIncreaseAfterOwnerJob(address user) {
     uint assetsAfter = assetsOf(user);
     assert balanceOf(user) > 0 => assetsAfter > assetsBefore;
 }
+
+// @note ERC20 properties are skipped

@@ -7,7 +7,7 @@ methods {
 }
 
 invariant correlatedLists(uint256 i, address t)
-	(i == 0 =>(getTokenAtIndex(i) == t => getIdOfToken(t) == i)) &&
+	((i == 0 && t != 0) =>(getTokenAtIndex(i) == t => getIdOfToken(t) == i)) &&
 		((i != 0 && t != 0) =>(getIdOfToken(t) == i <=> getTokenAtIndex(i) == t))
 	{
 		preserved addReserve(address token, address stableToken, address varToken, uint256 fee) {
@@ -17,7 +17,8 @@ invariant correlatedLists(uint256 i, address t)
 		}
 		
 		preserved removeReserve(address token) {
-			require getTokenAtIndex(getIdOfToken(token)) != 0;
+			// make sure different token have different ids, otherwise the invariant will be violated by havocing
+			require token == t || getIdOfToken(token) != i;
 		}
 	}
 
@@ -51,19 +52,6 @@ rule independencyOfTokensOnRemove(address t1, address t2) {
 	require getTokenAtIndex(id2) == t2;
 	
 	removeReserve(t2);
-	
-	assert getIdOfToken(t1) == id1 && getTokenAtIndex(id1) == t1;
-}
-
-rule independencyOfTokensOnAdd(address t1, address t2, address stableToken, address varToken, uint256 fee) {
-	require t1 != 0;
-	uint256 id1 = getIdOfToken(t1);
-	require getTokenAtIndex(id1) == t1;
-	require t2 != 0;
-	bool alreadyAdded = getIdOfToken(t2) != 0 || getTokenAtIndex(0) == t2;
-	require !alreadyAdded;
-	
-	addReserve(t2, stableToken, varToken, fee);
 	
 	assert getIdOfToken(t1) == id1 && getTokenAtIndex(id1) == t1;
 }
